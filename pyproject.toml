@@ -1,0 +1,11 @@
+[project]
+name = "voltaic"
+version = "0.1.0"
+description = "Solar analytics lakehouse — EV charging (ACN-Data) + solar (NREL PVDAQ) on PySpark + dbt + BigQuery"
+requires-python = ">=3.12"
+dependencies = [
+    "google-cloud-bigquery>=3.41.0",
+]
+
+[tool.uv]
+package = false

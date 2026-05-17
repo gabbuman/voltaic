@@ -1,0 +1,54 @@
+# Secrets — NEVER commit
+secrets/
+*.json.key
+*-sa.json
+*service-account*.json
+*credentials*.json
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# uv: .python-version IS committed so `uv run` picks the right Python on a fresh clone
+
+# Data — bronze/silver parquet lives locally, not in git
+data/
+!data/.gitkeep
+*.parquet
+*.csv.gz
+*.csv
+!**/sample_*.csv
+
+# dbt
+dbt_voltaic/target/
+dbt_voltaic/dbt_packages/
+dbt_voltaic/logs/
+dbt_voltaic/.user.yml
+
+# Evidence
+evidence/.evidence/
+evidence/node_modules/
+evidence/build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+!.vscode/settings.json
+*.swp

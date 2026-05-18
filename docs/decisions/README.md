@@ -44,3 +44,4 @@ in the first draft** and is where Shubh writes personal commentary
 | 0004  | [Use dbt Core (not dbt Cloud)](./0004-dbt-core-not-cloud.md)                              | accepted   |
 | 0005  | [Three-dataset split in BigQuery (raw / gold / ci)](./0005-three-dataset-split.md)        | accepted   |
 | 0006  | [Use the ACN-Data static GitHub mirror instead of the live API](./0006-acn-data-static-mirror.md) | accepted   |
+| 0007  | [Use DuckDB for bronze ingestion (PySpark held for silver)](./0007-duckdb-for-bronze-not-pyspark.md) | accepted   |

@@ -29,6 +29,9 @@ dist/
 # Data — bronze/silver parquet lives locally, not in git
 data/
 !data/.gitkeep
+
+# Ingestion run logs — transient, local only
+logs/
 *.parquet
 *.csv.gz
 *.csv

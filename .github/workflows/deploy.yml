@@ -76,8 +76,18 @@ jobs:
           print("wrote", out)
           PY
 
+      # `evidence build` does NOT run sources — it consumes previously
+      # generated data. Generate it from BigQuery first; --strict fails
+      # the job on any query/connection error instead of silently
+      # shipping a data-less site.
+      - name: Generate data from BigQuery
+        run: npm run sources:strict
+
       - name: Build Evidence site
         run: npm run build
+
+      - name: Verify data was built
+        run: test -f build/data/manifest.json || (echo "::error::No data in build output" && exit 1)
 
       - uses: actions/upload-pages-artifact@v3
         with:

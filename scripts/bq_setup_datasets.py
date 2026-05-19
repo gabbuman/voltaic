@@ -1,7 +1,7 @@
 """Provision BigQuery datasets for Voltaic. Idempotent — safe to re-run.
 
 Datasets:
-    voltaic_raw   — landings from PySpark silver (`bq load` target)
+    voltaic_raw   — landings from DuckDB silver (Parquet load target)
     voltaic_gold  — dbt mart outputs (facts, dims)
     voltaic_ci    — scratch space for CI runs (PR builds land here, never touch real data)
 
@@ -27,7 +27,7 @@ LOCATION = "US"
 SIXTY_DAYS_MS = 60 * 24 * 60 * 60 * 1000
 
 DATASETS = {
-    "voltaic_raw": "Raw landings from PySpark silver (bq load target)",
+    "voltaic_raw": "Raw landings from DuckDB silver (Parquet load target)",
     "voltaic_gold": "dbt gold marts — facts, dimensions, snapshots",
     "voltaic_ci": "Scratch space for CI runs; PR builds land here",
 }

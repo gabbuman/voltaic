@@ -39,9 +39,10 @@ in the first draft** and is where Shubh writes personal commentary
 | #     | Title                                                                            | Status     |
 |-------|----------------------------------------------------------------------------------|------------|
 | 0001  | [Adopt medallion architecture (bronze / silver / gold)](./0001-medallion-architecture.md) | accepted   |
-| 0002  | [Split processing between PySpark and dbt on BigQuery](./0002-pyspark-plus-dbt-split.md)  | accepted   |
+| 0002  | [Split processing between PySpark and dbt on BigQuery](./0002-pyspark-plus-dbt-split.md)  | superseded by 0008 |
 | 0003  | [Use BigQuery sandbox as the warehouse](./0003-bigquery-sandbox-warehouse.md)             | accepted   |
 | 0004  | [Use dbt Core (not dbt Cloud)](./0004-dbt-core-not-cloud.md)                              | accepted   |
 | 0005  | [Three-dataset split in BigQuery (raw / gold / ci)](./0005-three-dataset-split.md)        | accepted   |
 | 0006  | [Use the ACN-Data static GitHub mirror instead of the live API](./0006-acn-data-static-mirror.md) | accepted   |
 | 0007  | [Use DuckDB for bronze ingestion (PySpark held for silver)](./0007-duckdb-for-bronze-not-pyspark.md) | accepted   |
+| 0008  | [Use DuckDB for silver; PySpark reserved as scale-up path](./0008-duckdb-for-silver-supersedes-spark.md) | accepted   |

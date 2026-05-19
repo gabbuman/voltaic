@@ -1,7 +1,7 @@
 ---
 number: 0002
 title: Split processing between PySpark (bronze/silver) and dbt on BigQuery (gold)
-status: accepted
+status: superseded by 0008
 date: 2026-05-16
 ---
 

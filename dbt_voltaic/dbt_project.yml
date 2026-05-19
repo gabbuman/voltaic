@@ -1,0 +1,12 @@
+name: voltaic
+version: "0.1.0"
+profile: voltaic
+config-version: 2
+
+model-paths: ["models"]
+
+models:
+  voltaic:
+    marts:
+      # Gold marts are durable tables analysts and Evidence read directly.
+      +materialized: table

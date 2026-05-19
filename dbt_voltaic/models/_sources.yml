@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    description: DuckDB silver landed in BigQuery (ADR-0008).
+    database: solardataset-496600
+    schema: voltaic_raw
+    tables:
+      - name: charging_sessions
+        description: One row per EV charging session (composite key session_uid).
+        columns:
+          - name: session_uid
+            description: site:station_id:session_start_ts — unique per session.
+            data_tests: [unique, not_null]
+      - name: charging_meter_readings
+        description: One row per meter sample within a session (typed).

@@ -1,0 +1,26 @@
+# dbt connection profile. No secrets here — only a path to the
+# service-account keyfile (gitignored). Run dbt from the repo root so
+# the relative keyfile path resolves:
+#   uv run dbt build --project-dir dbt_voltaic --profiles-dir dbt_voltaic
+voltaic:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: secrets/voltaic-sa.json
+      project: solardataset-496600
+      dataset: voltaic_gold
+      location: US
+      threads: 4
+      priority: interactive
+    ci:
+      # CI builds land in the scratch dataset, never touching real gold.
+      type: bigquery
+      method: service-account
+      keyfile: secrets/voltaic-sa.json
+      project: solardataset-496600
+      dataset: voltaic_ci
+      location: US
+      threads: 4
+      priority: interactive

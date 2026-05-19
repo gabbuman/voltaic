@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Solar analytics lakehouse — EV charging (ACN-Data) + solar (NREL PVDAQ) on PySpark + dbt + BigQuery"
 requires-python = ">=3.12"
 dependencies = [
+    "dbt-bigquery>=1.8",
     "duckdb>=1.1.0",
     "google-cloud-bigquery>=3.41.0",
     "pyarrow>=24.0.0",

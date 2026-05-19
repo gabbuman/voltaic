@@ -45,9 +45,24 @@ jobs:
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: |
+          if [ -z "$GCP_SA_KEY" ]; then
+            echo "::error::GCP_SA_KEY secret is empty or unset. Add it under" \
+                 "Settings -> Secrets and variables -> Actions -> New repository" \
+                 "secret (name exactly GCP_SA_KEY, value = full voltaic-sa.json)," \
+                 "then re-run this workflow."
+            exit 1
+          fi
           python3 - <<'PY'
           import json, base64, os, pathlib
-          sa = json.loads(os.environ["GCP_SA_KEY"])
+          raw = os.environ["GCP_SA_KEY"].strip()
+          try:
+              sa = json.loads(raw)
+          except json.JSONDecodeError as e:
+              raise SystemExit(
+                  f"GCP_SA_KEY is set but is not valid JSON ({e}). "
+                  "Paste the entire contents of secrets/voltaic-sa.json, "
+                  "including the opening { and closing }."
+              )
           b = lambda s: base64.b64encode(s.encode()).decode()
           vals = {
               "authenticator": "service-account",

@@ -55,3 +55,4 @@ Thumbs.db
 .vscode/
 !.vscode/settings.json
 *.swp
+.gstack/

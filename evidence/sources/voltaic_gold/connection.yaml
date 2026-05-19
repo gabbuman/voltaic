@@ -1,0 +1,5 @@
+name: voltaic_gold
+type: bigquery
+options:
+  authenticator: service-account
+  location: US

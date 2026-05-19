@@ -46,3 +46,4 @@ in the first draft** and is where Shubh writes personal commentary
 | 0006  | [Use the ACN-Data static GitHub mirror instead of the live API](./0006-acn-data-static-mirror.md) | accepted   |
 | 0007  | [Use DuckDB for bronze ingestion (PySpark held for silver)](./0007-duckdb-for-bronze-not-pyspark.md) | accepted   |
 | 0008  | [Use DuckDB for silver; PySpark reserved as scale-up path](./0008-duckdb-for-silver-supersedes-spark.md) | accepted   |
+| 0009  | [Deploy Evidence to GitHub Pages via the Actions artifact API](./0009-pages-deploy-via-actions-artifact.md) | accepted   |

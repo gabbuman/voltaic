@@ -1,0 +1,79 @@
+name: Deploy Evidence site to Pages
+
+# Builds the Evidence static site (which queries the BigQuery gold marts
+# at build time) and publishes it via the GitHub Pages artifact API.
+# Pages "Source" must be set to "GitHub Actions" in repo settings.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "evidence/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+# Allow one concurrent deploy; let an in-progress run finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: evidence
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: evidence/package-lock.json
+
+      - run: npm ci
+
+      # Reconstruct the gitignored BigQuery connection from the SA secret.
+      # Evidence base64-encodes every value in connection.options.yaml.
+      - name: Write BigQuery connection secret
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: |
+          python3 - <<'PY'
+          import json, base64, os, pathlib
+          sa = json.loads(os.environ["GCP_SA_KEY"])
+          b = lambda s: base64.b64encode(s.encode()).decode()
+          vals = {
+              "authenticator": "service-account",
+              "project_id":    sa["project_id"],
+              "client_email":  sa["client_email"],
+              "private_key":   sa["private_key"],
+              "location":      "US",
+          }
+          out = pathlib.Path("sources/voltaic_gold/connection.options.yaml")
+          out.write_text("".join(f"{k}: {b(v)}\n" for k, v in vals.items()))
+          print("wrote", out)
+          PY
+
+      - name: Build Evidence site
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: evidence/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

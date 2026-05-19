@@ -1,3 +1,9 @@
+# Project page lives at https://gabbuman.github.io/voltaic/ — every asset
+# and link must be prefixed with /voltaic or it 404s on Pages. Committed
+# (not a CI-only env var) so local preview mirrors production exactly.
+deployment:
+  basePath: /voltaic
+
 appearance:
   default: system
   switcher: true
